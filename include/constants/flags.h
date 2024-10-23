@@ -42,12 +42,12 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
+#define FLAG_HAS_KANTO   0x20 // Has Kanto starter
+#define FLAG_ROUTE101GIVEMON    0x21 // checks for bottle cap to give kanto starter
+#define FLAG_PICKROUTE101GIVEMON    0x22 // enables choice of starter
+#define FLAG_ROUTE101CHARMANDER    0x23 // Unused Flag
+#define FLAG_HIDDENITEM_LITTLEROOT1    0x24 // Unused Flag
+#define FLAG_HIDDENITEM_LITTLEROOT2    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
@@ -652,9 +652,9 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
+#define FLAG_FORCE_WILD_DOUBLES  0x264 // force wild double battles
+#define FLAG_SMART_WILD_AI  0x265 // smart wild ai
+#define FLAG_EXPSHARE  0x266 // exp share flag
 #define FLAG_UNUSED_0x267  0x267 // Unused Flag
 #define FLAG_UNUSED_0x268  0x268 // Unused Flag
 #define FLAG_UNUSED_0x269  0x269 // Unused Flag
@@ -1561,11 +1561,37 @@
 #define FLAG_UNUSED_0x91D                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
 #define FLAG_UNUSED_0x91E                           (SYSTEM_FLAGS + 0xBE) // Unused Flag
 #define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
+#define FLAG_UNUSED_NEW01                           (SYSTEM_FLAGS + 0xC0) // Unused Flag
+#define FLAG_ROUTE101CHARMANDER                     (SYSTEM_FLAGS + 0xC1) // Route101 Charmander
+#define FLAG_UNUSED_NEW03                           (SYSTEM_FLAGS + 0xC2) // Unused Flag
+#define FLAG_UNUSED_NEW04                           (SYSTEM_FLAGS + 0xC3) // Unused Flag
+#define FLAG_UNUSED_NEW05                           (SYSTEM_FLAGS + 0xC4) // Unused Flag
+#define FLAG_UNUSED_NEW06                           (SYSTEM_FLAGS + 0xC5) // Unused Flag
+#define FLAG_UNUSED_NEW07                           (SYSTEM_FLAGS + 0xC6) // Unused Flag
+#define FLAG_UNUSED_NEW08                           (SYSTEM_FLAGS + 0xC7) // Unused Flag
+#define FLAG_UNUSED_NEW09                           (SYSTEM_FLAGS + 0xC8) // Unused Flag
+#define FLAG_UNUSED_NEW10                           (SYSTEM_FLAGS + 0xC9) // Unused Flag
+#define FLAG_UNUSED_NEW11                           (SYSTEM_FLAGS + 0xCA) // Unused Flag
+#define FLAG_UNUSED_NEW12                           (SYSTEM_FLAGS + 0xCB) // Unused Flag
+#define FLAG_UNUSED_NEW13                           (SYSTEM_FLAGS + 0xCC) // Unused Flag
+#define FLAG_UNUSED_NEW14                           (SYSTEM_FLAGS + 0xCD) // Unused Flag
+#define FLAG_UNUSED_NEW15                           (SYSTEM_FLAGS + 0xCE) // Unused Flag
+#define FLAG_UNUSED_NEW16                           (SYSTEM_FLAGS + 0xCF) // Unused Flag
+#define FLAG_UNUSED_NEW17                           (SYSTEM_FLAGS + 0xDA) // Unused Flag
+#define FLAG_UNUSED_NEW18                           (SYSTEM_FLAGS + 0xDB) // Unused Flag
+#define FLAG_UNUSED_NEW19                           (SYSTEM_FLAGS + 0xDC) // Unused Flag
+#define FLAG_UNUSED_NEW20                           (SYSTEM_FLAGS + 0xDD) // Unused Flag
+#define FLAG_UNUSED_NEW21                           (SYSTEM_FLAGS + 0xDE) // Unused Flag
+#define FLAG_UNUSED_NEW22                           (SYSTEM_FLAGS + 0xDF) // Unused Flag
+#define FLAG_UNUSED_NEW23                           (SYSTEM_FLAGS + 0xEA) // Unused Flag
+
+
+
 
 // Daily Flags
 // These flags are cleared once per day
 // The start and end are byte-aligned because the flags are cleared in byte increments
-#define DAILY_FLAGS_START                           (FLAG_UNUSED_0x91F + (8 - FLAG_UNUSED_0x91F % 8))
+#define DAILY_FLAGS_START                           (FLAG_UNUSED_NEW23 + (8 - FLAG_UNUSED_NEW23 % 8))
 #define FLAG_UNUSED_0x920                           (DAILY_FLAGS_START + 0x0)  // Unused Flag
 #define FLAG_DAILY_CONTEST_LOBBY_RECEIVED_BERRY     (DAILY_FLAGS_START + 0x1)
 #define FLAG_DAILY_SECRET_BASE                      (DAILY_FLAGS_START + 0x2)

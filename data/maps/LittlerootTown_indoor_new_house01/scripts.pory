@@ -1,0 +1,181 @@
+raw `
+LittlerootTown_indoor_new_house01_MapScripts::
+	.byte 0
+`
+script ROUTE101_GIVELEGEND{
+lock
+faceplayer
+
+	if(flag(FLAG_ROUTE101GIVEMON) == FALSE){
+
+	msgbox(format("Do you have a Bottle Cap? Ill give you a Kanto Pokemon for one."), MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES) {
+
+	
+	checkitem (ITEM_BOTTLE_CAP)
+	if(var(VAR_RESULT) == TRUE){
+		setflag(FLAG_ROUTE101GIVEMON)
+		removeitem (ITEM_BOTTLE_CAP)
+		msgbox(format("Here you go, as promised you may choose one of these three."))
+
+	}
+	else{
+	msgbox(format("Hmm.. I don't see one. You could find one north of Oldsdale"))
+
+	}
+	
+	
+
+
+
+	}
+	else
+	{
+		msgbox(format("Darn, oh well I heard there is a guy north of Oldsdale that is giving them away!"))
+	
+
+
+	}
+	}
+	else {
+	msgbox(format("Hey how have you been?"))
+
+	}
+	
+
+	release
+	end
+}
+
+script KANTO_STARTER_CHARMANDER {
+lock
+faceplayer
+        if(flag(FLAG_ROUTE101GIVEMON) == TRUE){
+            msgbox(format("Would you like to pick Charmander?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES) {
+                msgbox(format("Okay Charmander will join your team"))
+                givemon (SPECIES_CHARMANDER, 3, ITEM_DREAM_BALL)
+                setflag(FLAG_HAS_KANTO)
+                removeobject(1)
+
+
+
+
+            }
+            else{
+                msgbox(format("I think I will choose something else"))
+
+
+
+            }
+
+
+        }
+
+else {
+     playmoncry (SPECIES_CHARMANDER, CRY_MODE_NORMAL)
+     showmonpic (SPECIES_CHARMANDER,10,3)
+     msgbox(format("CHAR!"))
+     hidemonpic
+   
+
+
+}
+
+    release
+    end
+}
+
+script HiddenItem_LittleRoot {
+    lock
+    giveitem (ITEM_BOTTLE_CAP,1)
+    setflag(FLAG_HIDDENITEM_LITTLEROOT1)
+    release
+    end
+    
+}
+
+script KANTO_STARTER_BULBASAUR {
+lock
+faceplayer
+        if(flag(FLAG_ROUTE101GIVEMON) == TRUE){
+            msgbox(format("Would you like to pick BULBASAUR?"), MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES) {
+                msgbox(format("Okay BULBASAUR will join your team"))
+                givemon (SPECIES_BULBASAUR, 3, ITEM_DREAM_BALL)
+                setflag(FLAG_HAS_KANTO)
+                removeobject(3)
+
+
+
+
+            }
+            else{
+                msgbox(format("I think I will choose something else"))
+
+
+
+            }
+
+
+        }
+
+else {
+     playmoncry (SPECIES_BULBASAUR, CRY_MODE_NORMAL)
+     showmonpic (SPECIES_BULBASAUR,10,3)
+     msgbox(format("BULBA!"))
+     hidemonpic
+   
+
+
+}
+
+    release
+    end
+}
+
+
+script KANTO_STARTER_SQUIRTLE {
+lock
+faceplayer
+        if(flag(FLAG_ROUTE101GIVEMON) == TRUE){
+            playmoncry (SPECIES_SQUIRTLE, CRY_MODE_NORMAL)
+            showmonpic (SPECIES_SQUIRTLE,10,3)
+            msgbox(format("Would you like to pick SQUIRTLE?"), MSGBOX_YESNO)
+            hidemonpic
+            if(var(VAR_RESULT) == YES) {
+                msgbox(format("Okay SQUIRTLE will join your team"))
+                givemon (SPECIES_SQUIRTLE, 3, ITEM_DREAM_BALL)
+                setflag(FLAG_HAS_KANTO)
+                removeobject(2)
+
+
+
+
+            }
+            else{
+                msgbox(format("I think I will choose something else"))
+
+
+
+            }
+
+
+        }
+
+else {
+     playmoncry (SPECIES_SQUIRTLE, CRY_MODE_NORMAL)
+     showmonpic (SPECIES_SQUIRTLE,10,3)
+     msgbox(format("SQUIRTLE!"))
+     hidemonpic
+   
+
+
+}
+
+    release
+    end
+}
+
+
+
