@@ -205,14 +205,9 @@ void SetMainCallback2(MainCallback callback)
 
 void StartTimer1(void)
 {
-    if (HQ_RANDOM)
-    {
-        REG_TM2CNT_L = 0;
-        REG_TM2CNT_H = TIMER_ENABLE | TIMER_COUNTUP;
-    }
-
-    REG_TM1CNT_H = TIMER_ENABLE;
+    REG_TM1CNT_H = 0x80;
 }
+
 
 void SeedRngAndSetTrainerId(void)
 {
