@@ -5223,19 +5223,3 @@ static bool32 LoadBgGfx(void)
     sGfx->loadState++;
     return FALSE;
 }
-
-void IsCharmanderInParty(void)
-{
-    int i;
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SANITY_HAS_SPECIES)
-            && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) == SPECIES_CHARMANDER)
-        {
-            gSpecialVar_Result = TRUE;
-            return;
-        }
-    }
-
-    gSpecialVar_Result = FALSE;
-}
