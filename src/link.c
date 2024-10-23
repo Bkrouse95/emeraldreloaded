@@ -506,10 +506,6 @@ u16 LinkMain2(const u16 *heldKeys)
     return gLinkStatus;
 }
 
-
-
-
-
 static void HandleReceiveRemoteLinkPlayer(u8 who)
 {
     int i;
