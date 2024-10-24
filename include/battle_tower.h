@@ -50,6 +50,7 @@ u16 GetBattleFacilityTrainerGfxId(u16 trainerId);
 void PutNewBattleTowerRecord(struct EmeraldBattleTowerRecord *newRecordEm);
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId);
 u8 GetFrontierOpponentClass(u16 trainerId);
+void FillEreaderTrainerWithPlayerData(void);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 void FillFrontierTrainerParty(u8 monsCount);
 void FillFrontierTrainersParties(u8 monsCount);

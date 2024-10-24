@@ -554,4 +554,8 @@ gSpecials::
 	def_special Script_GetChosenMonOffensiveIVs
 	def_special Script_GetChosenMonDefensiveIVs
 	def_special IsCharmanderInParty
+	def_special TrySetBattleTowerLinkType
+	def_special CallNetworkFunction
+	
+
 	

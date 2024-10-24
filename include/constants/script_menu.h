@@ -97,7 +97,7 @@
 #define MULTI_FORCED_START_MENU            86
 #define MULTI_FRONTIER_GAMBLER_BET         87
 #define MULTI_TENT                         88
-#define MULTI_UNUSED_SSTIDAL_1             89 // These 4 were replaced by CreateLilycoveSSTidalMultichoice
+#define MULTI_NET_MAIL                     89 // These 4 were replaced by CreateLilycoveSSTidalMultichoice
 #define MULTI_UNUSED_SSTIDAL_2             90 //
 #define MULTI_UNUSED_SSTIDAL_3             91 //
 #define MULTI_UNUSED_SSTIDAL_4             92 //
@@ -123,6 +123,7 @@
 #define MULTI_FALLARBOR_TENT_RULES         112
 #define MULTI_TAG_MATCH_TYPE               113
 #define MULTI_BERRY_PLOT                   114
+
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0
