@@ -313,6 +313,14 @@ enum EvolutionMode {
     EVO_MODE_BATTLE_ONLY,        // This mode is only used in battles to support Tandemaus' unique requirement
 };
 
+
+enum PokemonJumpType{
+    PKMN_JUMP_TYPE_NONE, // Not allowed in Pokémon Jump
+    PKMN_JUMP_TYPE_NORMAL,
+    PKMN_JUMP_TYPE_FAST,
+    PKMN_JUMP_TYPE_SLOW,
+};
+
 #define MON_PIC_WIDTH 64
 #define MON_PIC_HEIGHT 64
 #define MON_PIC_SIZE (MON_PIC_WIDTH * MON_PIC_HEIGHT / 2)
@@ -324,8 +332,9 @@ enum EvolutionMode {
 // - Unown has 1 frame, presumably to avoid the work of animating all 28 of its forms
 #define MAX_MON_PIC_FRAMES 2
 
-#define BATTLE_ALIVE_EXCEPT_BATTLER  0
-#define BATTLE_ALIVE_SIDE            1
+#define BATTLE_ALIVE_EXCEPT_BATTLER      0
+#define BATTLE_ALIVE_EXCEPT_BATTLER_SIDE 1
+#define BATTLE_ALIVE_SIDE                2
 
 #define SKIP_FRONT_ANIM (1 << 7)
 

@@ -121,7 +121,7 @@ CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST)
 ARMCC := $(PREFIX)gcc
 PATH_ARMCC := PATH="$(PATH)" $(ARMCC)
 CC1 := $(shell $(PATH_ARMCC) --print-prog-name=cc1) -quiet
-override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
+override CFLAGS += -mthumb -mthumb-interwork -O$(O_LEVEL) -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 ifeq ($(ANALYZE),1)
   override CFLAGS += -fanalyzer
 endif
@@ -164,6 +164,12 @@ TRAINERPROC  := $(TOOLS_DIR)/trainerproc/trainerproc$(EXE)
 PATCHELF     := $(TOOLS_DIR)/patchelf/patchelf$(EXE)
 ROMTEST      ?= $(shell { command -v mgba-rom-test || command -v $(TOOLS_DIR)/mgba/mgba-rom-test$(EXE); } 2>/dev/null)
 ROMTESTHYDRA := $(TOOLS_DIR)/mgba-rom-test-hydra/mgba-rom-test-hydra$(EXE)
+
+# Learnset helper is a Python script
+LEARNSET_HELPERS_DIR := $(TOOLS_DIR)/learnset_helpers
+LEARNSET_HELPERS_DATA_DIR := $(LEARNSET_HELPERS_DIR)/porymoves_files
+LEARNSET_HELPERS_BUILD_DIR := $(LEARNSET_HELPERS_DIR)/build
+ALL_LEARNABLES_JSON := $(LEARNSET_HELPERS_BUILD_DIR)/all_learnables.json
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -338,6 +344,7 @@ generated: $(AUTO_GEN_TARGETS)
 
 clean-generated:
 	-rm -f $(AUTO_GEN_TARGETS)
+	-rm -f $(ALL_LEARNABLES_JSON)
 
 COMPETITIVE_PARTY_SYNTAX := $(shell PATH="$(PATH)"; echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/gba/defines.h -imacros include/config/general.h | tail -n1)
 ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)
@@ -346,6 +353,7 @@ endif
 
 $(C_BUILDDIR)/librfu_intr.o: CFLAGS := -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -fno-toplevel-reorder -Wno-pointer-to-int-cast
 $(C_BUILDDIR)/berry_crush.o: override CFLAGS += -Wno-address-of-packed-member
+$(C_BUILDDIR)/agb_flash.o: override CFLAGS += -fno-toplevel-reorder
 $(C_BUILDDIR)/pokedex_plus_hgss.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 # Annoyingly we can't turn this on just for src/data/trainers.h
 $(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret
@@ -426,11 +434,16 @@ $(OBJ_DIR)/sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
 $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 	$(RAMSCRGEN) ewram_data $< ENGLISH > $@
 
-MOVES_JSON_DIR := $(TOOLS_DIR)/learnset_helpers/porymoves_files
-TEACHABLE_DEPS := $(shell find data/ -type f -name '*.inc') $(INCLUDE_DIRS)/constants/tms_hms.h $(C_SUBDIR)/pokemon.c $(wildcard $(MOVES_JSON_DIR)/*.json)
+TEACHABLE_DEPS := $(ALL_LEARNABLES_JSON) $(shell find data/ -type f -name '*.inc') $(INCLUDE_DIRS)/constants/tms_hms.h $(C_SUBDIR)/pokemon.c
+
+$(LEARNSET_HELPERS_BUILD_DIR):
+	@mkdir -p $@
+
+$(ALL_LEARNABLES_JSON): $(wildcard $(LEARNSET_HELPERS_DATA_DIR)/*.json) | $(LEARNSET_HELPERS_BUILD_DIR)
+	python3 $(LEARNSET_HELPERS_DIR)/make_learnables.py $(LEARNSET_HELPERS_DATA_DIR) $@
 
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS)
-	python3 $(TOOLS_DIR)/learnset_helpers/teachable.py
+	python3 $(LEARNSET_HELPERS_DIR)/make_teachables.py $<
 
 # Linker script
 LD_SCRIPT := ld_script_modern.ld
